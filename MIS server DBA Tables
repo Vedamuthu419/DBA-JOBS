@@ -1,0 +1,764 @@
+USE [DBADB]
+GO
+
+/****** Object:  Table [dbo].[BackupInfoData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BackupInfoData](
+	[Servername] [varchar](50) NULL,
+	[DBNmae] [varchar](70) NULL,
+	[BackupStartDate] [datetime] NULL,
+	[BackupEndTime] [datetime] NULL,
+	[ExpDate] [datetime] NULL,
+	[backupType] [varchar](50) NULL,
+	[BackupSize] [bigint] NULL,
+	[PhysicalDeviceName] [varchar](max) NULL,
+	[backupName] [varchar](255) NULL,
+	[description] [varchar](255) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[BlockedQueriesInfo]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BlockedQueriesInfo](
+	[ServerName] [nvarchar](100) NULL,
+	[BlockedSessionID] [int] NULL,
+	[StartTime] [datetime] NULL,
+	[WaitingInMinutes] [float] NULL,
+	[WaitType] [nvarchar](50) NULL,
+	[BlockingSessionID] [int] NULL,
+	[QueryWaiting] [nvarchar](max) NULL,
+	[logdate] [datetime] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[CommandLog]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CommandLog](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[DatabaseName] [sysname] NULL,
+	[SchemaName] [sysname] NULL,
+	[ObjectName] [sysname] NULL,
+	[ObjectType] [char](2) NULL,
+	[IndexName] [sysname] NULL,
+	[IndexType] [tinyint] NULL,
+	[StatisticsName] [sysname] NULL,
+	[PartitionNumber] [int] NULL,
+	[ExtendedInfo] [xml] NULL,
+	[Command] [nvarchar](max) NOT NULL,
+	[CommandType] [nvarchar](60) NOT NULL,
+	[StartTime] [datetime2](7) NOT NULL,
+	[EndTime] [datetime2](7) NULL,
+	[ErrorNumber] [int] NULL,
+	[ErrorMessage] [nvarchar](max) NULL,
+ CONSTRAINT [PK_CommandLog] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[CPUUtilisationdata]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CPUUtilisationdata](
+	[Time] [datetime] NULL,
+	[IdleCPU] [int] NULL,
+	[SQLUtilisedCPU] [int] NULL,
+	[Otherprosses] [int] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[DB_FileSizeData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DB_FileSizeData](
+	[DBName] [varchar](100) NULL,
+	[File_Nmae] [varchar](200) NULL,
+	[Type] [varchar](100) NULL,
+	[Size_MB] [int] NULL,
+	[DB_TotalSize] [int] NULL,
+	[date] [date] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[DB_Meta]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DB_Meta](
+	[Instance_Name] [varchar](100) NULL,
+	[Database_Names] [varchar](100) NULL,
+	[Dates] [date] NULL,
+	[Size MB] [decimal](10, 2) NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[ErrorLogdata]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ErrorLogdata](
+	[LogDate] [datetime] NULL,
+	[ProcessInfo] [varchar](30) NULL,
+	[ErrorMessage] [nvarchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[HeadBlockingInfo]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[HeadBlockingInfo](
+	[host_name] [nvarchar](100) NULL,
+	[login_name] [nvarchar](100) NULL,
+	[duration] [nvarchar](100) NULL,
+	[head_blocker_session_id] [int] NULL,
+	[blocking_queries_count] [int] NULL,
+	[head_blocker_query] [nvarchar](max) NULL,
+	[logdate] [datetime] NULL,
+	[is_closed] [tinyint] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[HeadBlockingInfo1]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[HeadBlockingInfo1](
+	[host_name] [nvarchar](100) NULL,
+	[login_name] [nvarchar](100) NULL,
+	[login_time] [nvarchar](100) NULL,
+	[head_blocker_session_id] [int] NULL,
+	[blocking_queries_count] [int] NULL,
+	[head_blocker_query] [nvarchar](max) NULL,
+	[logdate] [datetime] NULL,
+	[duration] [nvarchar](12) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[IndexFragData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[IndexFragData](
+	[DBName] [varchar](100) NULL,
+	[Schemaname] [varchar](100) NULL,
+	[Tablename] [varchar](200) NULL,
+	[Index_Desc] [varchar](100) NULL,
+	[Indexname] [varchar](200) NULL,
+	[FragPercentage] [float] NULL,
+	[IndexSizeKB] [bigint] NULL,
+	[page_count] [bigint] NULL,
+	[FragDate] [date] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[JobHistoryDataCollection]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[JobHistoryDataCollection](
+	[Job Name] [varchar](200) NULL,
+	[Time Run] [datetime] NULL,
+	[Job Status] [varchar](100) NULL,
+	[Job Outcome] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[KilledSessionsLog]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[KilledSessionsLog](
+	[SessionID] [int] NULL,
+	[LoginName] [nvarchar](128) NULL,
+	[HostName] [nvarchar](128) NULL,
+	[ProgramName] [nvarchar](128) NULL,
+	[Status] [nvarchar](30) NULL,
+	[LastRequestEndTime] [datetime] NULL,
+	[LoginTime] [datetime] NULL,
+	[SqlText] [nvarchar](max) NULL,
+	[ObjectName] [nvarchar](512) NULL,
+	[WaitType] [nvarchar](60) NULL,
+	[DatabaseName] [nvarchar](128) NULL,
+	[OpenTranCount] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Log_File_Shrink_AlertTable]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Log_File_Shrink_AlertTable](
+	[AlertID] [int] IDENTITY(1,1) NOT NULL,
+	[DatabaseName] [nvarchar](128) NULL,
+	[LogFileName] [nvarchar](256) NULL,
+	[TotalLogFileSizeMB] [decimal](18, 2) NULL,
+	[AlertMessage] [nvarchar](max) NULL,
+	[AlertTime] [datetime] NULL,
+	[AlertStatus] [varchar](25) NULL,
+	[has_email_been_sent_to_operator] [tinyint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AlertID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Log_File_Size]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Log_File_Size](
+	[DBName] [nvarchar](128) NULL,
+	[Autogrowth Inc MB] [int] NULL,
+	[Autogrowth Inc %] [int] NULL,
+	[AutogrowthStatus] [nvarchar](50) NULL,
+	[DiskDrive] [nvarchar](10) NULL,
+	[DiskFreeSpaceMB] [decimal](18, 2) NULL,
+	[FileType] [nvarchar](10) NULL,
+	[FileName] [nvarchar](256) NULL,
+	[TotalLogfileSizeMB] [decimal](18, 2) NULL,
+	[FreeSpaceMB] [decimal](18, 2) NULL,
+	[PercentMBFree] [decimal](18, 2) NULL,
+	[FileLocation] [nvarchar](256) NULL,
+	[AutoGrowthMB] [nvarchar](250) NULL,
+	[LogDate] [datetime] NULL,
+	[LastTlogBackupTime] [datetime] NULL,
+	[LastTlogBackupTime1] [datetime] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[log_shipping_alerts]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[log_shipping_alerts](
+	[alert_id] [int] IDENTITY(1,1) NOT NULL,
+	[alert_time] [datetime] NOT NULL,
+	[secondary_server] [nvarchar](128) NOT NULL,
+	[database_name] [nvarchar](128) NOT NULL,
+	[restore_duration_minutes] [int] NOT NULL,
+	[avg_io_ms] [bigint] NULL,
+	[cpu_usage_percent] [decimal](5, 2) NULL,
+	[free_disk_space_mb] [bigint] NULL,
+	[last_log_message] [nvarchar](1000) NOT NULL,
+	[alert_message] [nvarchar](1000) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[alert_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[longqrydetails]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[longqrydetails](
+	[InstanceName] [nvarchar](max) NULL,
+	[StartTime] [datetime] NULL,
+	[ElapsedTime] [varchar](8) NULL,
+	[SPID] [int] NULL,
+	[UserName] [nvarchar](max) NULL,
+	[ProgramName] [nvarchar](max) NULL,
+	[DatabaseName] [nvarchar](max) NULL,
+	[ExecutingSQL] [nvarchar](max) NULL,
+	[WaitType] [nvarchar](max) NULL,
+	[logdate] [datetime] NULL,
+	[is_closed] [int] NOT NULL,
+	[StatementText] [nvarchar](max) NULL,
+	[StoredProcedure] [nvarchar](255) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PageLifeExpectancyLog]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PageLifeExpectancyLog](
+	[LogID] [int] IDENTITY(1,1) NOT NULL,
+	[CounterName] [nvarchar](255) NULL,
+	[PageLifeExpectancy] [bigint] NULL,
+	[LoggedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[LogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PasswordHistory]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PasswordHistory](
+	[user_name] [varchar](10) NULL,
+	[updatedate] [varchar](30) NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PerfMonData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PerfMonData](
+	[Counter] [nvarchar](770) NULL,
+	[Value] [decimal](38, 2) NULL,
+	[CaptureDate] [datetime] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[proceduredata]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[proceduredata](
+	[SPName] [varchar](200) NULL,
+	[DBName] [varchar](100) NULL,
+	[object_id] [int] NULL,
+	[type] [char](10) NULL,
+	[sql_handle] [varbinary](200) NULL,
+	[plan_handle] [varbinary](200) NULL,
+	[cached_time] [datetime] NULL,
+	[last_execution_time] [datetime] NULL,
+	[execution_count] [bigint] NULL,
+	[total_worker_time] [bigint] NULL,
+	[last_worker_time] [bigint] NULL,
+	[min_worker_time] [bigint] NULL,
+	[max_worker_time] [bigint] NULL,
+	[total_physical_reads] [bigint] NULL,
+	[last_physical_reads] [bigint] NULL,
+	[min_physical_reads] [bigint] NULL,
+	[max_physical_reads] [bigint] NULL,
+	[total_logical_writes] [bigint] NULL,
+	[last_logical_writes] [bigint] NULL,
+	[min_logical_writes] [bigint] NULL,
+	[max_logical_writes] [bigint] NULL,
+	[total_logical_reads] [bigint] NULL,
+	[last_logical_reads] [bigint] NULL,
+	[min_logical_reads] [bigint] NULL,
+	[max_logical_reads] [bigint] NULL,
+	[total_elapsed_time] [bigint] NULL,
+	[last_elapsed_time] [bigint] NULL,
+	[min_elapsed_time] [bigint] NULL,
+	[max_elapsed_time] [bigint] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[QueryStatData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[QueryStatData](
+	[dbid] [int] NULL,
+	[sql_handle] [varbinary](64) NULL,
+	[SQL_statement] [varchar](max) NULL,
+	[execution_count] [bigint] NULL,
+	[plan_generation_num] [bigint] NULL,
+	[last_execution_time] [datetime] NULL,
+	[last_worker_time] [bigint] NULL,
+	[last_physical_reads] [bigint] NULL,
+	[last_logical_writes] [bigint] NULL,
+	[last_elapsed_time] [bigint] NULL,
+	[last_rows] [bigint] NULL,
+	[last_dop] [bigint] NULL,
+	[last_grant_kb] [bigint] NULL,
+	[last_used_grant_kb] [bigint] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Report_Data_Queries]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Report_Data_Queries](
+	[query_name] [sysname] NOT NULL,
+	[query] [varchar](max) NULL,
+	[run_on] [sysname] NOT NULL,
+	[renderConfig] [varchar](max) NULL,
+	[order] [int] NOT NULL,
+ CONSTRAINT [UNIQUE_QUERYNAME] UNIQUE NONCLUSTERED 
+(
+	[query_name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[SchemaChangesData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SchemaChangesData](
+	[DBID] [int] NULL,
+	[DBName] [varchar](50) NULL,
+	[LoginName] [varchar](100) NULL,
+	[Hostname] [varchar](100) NULL,
+	[AppName] [varchar](100) NULL,
+	[SPID] [int] NULL,
+	[StartTime] [datetime] NULL,
+	[EndTime] [datetime] NULL,
+	[EventClass] [bigint] NULL,
+	[EventDesc] [varchar](40) NULL,
+	[ObjectTpe] [bigint] NULL,
+	[ObjectTypeDesc] [varchar](60) NULL,
+	[ObjectID] [bigint] NULL,
+	[objectName] [varchar](100) NULL,
+	[EventSubClass] [int] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[SessionLogs]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SessionLogs](
+	[LogID] [int] IDENTITY(1,1) NOT NULL,
+	[SessionID] [int] NULL,
+	[HostName] [nvarchar](128) NULL,
+	[ProgramName] [nvarchar](256) NULL,
+	[LoginName] [nvarchar](128) NULL,
+	[ClientIPAddress] [nvarchar](45) NULL,
+	[ServerIPAddress] [nvarchar](45) NULL,
+	[ConnectionStartTime] [datetime] NULL,
+	[SessionStatus] [nvarchar](50) NULL,
+	[CPUTime] [int] NULL,
+	[MemoryUsage] [int] NULL,
+	[LogTimestamp] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[LogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[sql_server_agent_job]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[sql_server_agent_job](
+	[sql_server_agent_job_id] [int] IDENTITY(1,1) NOT NULL,
+	[sql_server_agent_job_id_guid] [uniqueidentifier] NOT NULL,
+	[sql_server_agent_job_name] [nvarchar](128) NOT NULL,
+	[job_create_datetime_utc] [datetime] NOT NULL,
+	[job_last_modified_datetime_utc] [datetime] NOT NULL,
+	[is_enabled] [bit] NOT NULL,
+	[is_deleted] [bit] NOT NULL,
+	[job_category_name] [varchar](100) NOT NULL,
+	[owner_login_name] [varchar](256) NULL,
+	[Frequency] [nvarchar](max) NULL,
+	[DayInterval] [nvarchar](max) NULL,
+	[DailyFrequency] [nvarchar](max) NULL,
+	[StartTime] [nvarchar](8) NULL,
+	[EndTime] [nvarchar](8) NULL,
+	[ScheduleIsEnabled] [tinyint] NULL,
+ CONSTRAINT [PK_sql_server_agent_job1] PRIMARY KEY CLUSTERED 
+(
+	[sql_server_agent_job_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[sql_server_agent_job_failure]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[sql_server_agent_job_failure](
+	[sql_server_agent_job_failure_id] [int] IDENTITY(1,1) NOT NULL,
+	[sql_server_agent_job_id] [int] NOT NULL,
+	[sql_server_agent_instance_id] [int] NOT NULL,
+	[job_start_time_utc] [datetime] NOT NULL,
+	[job_failure_time_utc] [datetime] NOT NULL,
+	[job_failure_step_number] [smallint] NOT NULL,
+	[job_failure_step_name] [varchar](250) NOT NULL,
+	[job_failure_message] [varchar](max) NOT NULL,
+	[job_step_failure_message] [varchar](max) NOT NULL,
+	[job_step_severity] [int] NOT NULL,
+	[job_step_message_id] [int] NOT NULL,
+	[retries_attempted] [int] NOT NULL,
+	[has_email_been_sent_to_operator] [tinyint] NOT NULL,
+	[ticket_status] [varchar](50) NULL,
+ CONSTRAINT [PK_sql_server_agent_job_failure1] PRIMARY KEY CLUSTERED 
+(
+	[sql_server_agent_job_failure_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[sql_server_agent_job_failure_old]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[sql_server_agent_job_failure_old](
+	[sql_server_agent_job_failure_id] [int] IDENTITY(1,1) NOT NULL,
+	[sql_server_agent_job_id] [int] NOT NULL,
+	[sql_server_agent_instance_id] [int] NOT NULL,
+	[job_start_time_utc] [datetime] NOT NULL,
+	[job_failure_time_utc] [datetime] NOT NULL,
+	[job_failure_step_number] [smallint] NOT NULL,
+	[job_failure_step_name] [varchar](250) NOT NULL,
+	[job_failure_message] [varchar](max) NOT NULL,
+	[job_step_failure_message] [varchar](max) NOT NULL,
+	[job_step_severity] [int] NOT NULL,
+	[job_step_message_id] [int] NOT NULL,
+	[retries_attempted] [int] NOT NULL,
+	[has_email_been_sent_to_operator] [bit] NOT NULL,
+ CONSTRAINT [PK_sql_server_agent_job_failure] PRIMARY KEY CLUSTERED 
+(
+	[sql_server_agent_job_failure_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 95) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[sql_server_agent_job_old]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[sql_server_agent_job_old](
+	[sql_server_agent_job_id] [int] IDENTITY(1,1) NOT NULL,
+	[sql_server_agent_job_id_guid] [uniqueidentifier] NOT NULL,
+	[sql_server_agent_job_name] [nvarchar](128) NOT NULL,
+	[job_create_datetime_utc] [datetime] NOT NULL,
+	[job_last_modified_datetime_utc] [datetime] NOT NULL,
+	[is_enabled] [bit] NOT NULL,
+	[is_deleted] [bit] NOT NULL,
+	[job_category_name] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_sql_server_agent_job] PRIMARY KEY CLUSTERED 
+(
+	[sql_server_agent_job_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 95) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[TableSizeData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TableSizeData](
+	[DBID] [int] NULL,
+	[DBNAME] [varchar](200) NULL,
+	[TableName] [varchar](200) NULL,
+	[SchemaName] [varchar](200) NULL,
+	[rows] [bigint] NULL,
+	[TotalSpaceKB] [bigint] NULL,
+	[TotalSpaceMB] [float] NULL,
+	[UsedSpaceKB] [bigint] NULL,
+	[UsedSpaceMB] [float] NULL,
+	[UnusedSpaceKB] [bigint] NULL,
+	[UnusedSpaceMB] [float] NULL,
+	[Date] [date] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[UnusedIndexes]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UnusedIndexes](
+	[DatabaseName] [nvarchar](128) NULL,
+	[ObjectName] [nvarchar](128) NULL,
+	[IndexName] [nvarchar](128) NULL,
+	[IndexID] [int] NULL,
+	[UserSeek] [bigint] NULL,
+	[UserScans] [bigint] NULL,
+	[UserLookups] [bigint] NULL,
+	[UserUpdates] [bigint] NULL,
+	[TableRows] [bigint] NULL,
+	[DropStatement] [nvarchar](max) NULL,
+	[Logdate] [datetime] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[WaitStatData]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[WaitStatData](
+	[WaitType] [varchar](200) NULL,
+	[Wait_S] [decimal](16, 2) NULL,
+	[Signal_S] [decimal](16, 2) NULL,
+	[WaitCount] [bigint] NULL,
+	[Percentage] [decimal](5, 2) NULL,
+	[AverageWait_S] [decimal](16, 4) NULL,
+	[Date] [datetime] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[whoisactive_1]    Script Date: 2/10/2026 6:34:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[whoisactive_1](
+	[dd hh:mm:ss.mss] [varchar](8000) NULL,
+	[session_id] [smallint] NOT NULL,
+	[sql_text] [xml] NULL,
+	[login_name] [nvarchar](128) NOT NULL,
+	[wait_info] [nvarchar](4000) NULL,
+	[CPU] [varchar](30) NULL,
+	[tempdb_allocations] [varchar](30) NULL,
+	[tempdb_current] [varchar](30) NULL,
+	[blocking_session_id] [smallint] NULL,
+	[reads] [varchar](30) NULL,
+	[writes] [varchar](30) NULL,
+	[physical_reads] [varchar](30) NULL,
+	[query_plan] [xml] NULL,
+	[used_memory] [varchar](30) NULL,
+	[status] [varchar](30) NOT NULL,
+	[open_tran_count] [varchar](30) NULL,
+	[percent_complete] [varchar](30) NULL,
+	[host_name] [nvarchar](128) NULL,
+	[database_name] [nvarchar](128) NULL,
+	[program_name] [nvarchar](128) NULL,
+	[start_time] [datetime] NOT NULL,
+	[login_time] [datetime] NULL,
+	[request_id] [int] NULL,
+	[collection_time] [datetime] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[BlockedQueriesInfo] ADD  DEFAULT (getdate()) FOR [logdate]
+GO
+
+ALTER TABLE [dbo].[HeadBlockingInfo] ADD  DEFAULT (getdate()) FOR [logdate]
+GO
+
+ALTER TABLE [dbo].[HeadBlockingInfo] ADD  DEFAULT ((0)) FOR [is_closed]
+GO
+
+ALTER TABLE [dbo].[HeadBlockingInfo1] ADD  DEFAULT (getdate()) FOR [logdate]
+GO
+
+ALTER TABLE [dbo].[longqrydetails] ADD  DEFAULT (getdate()) FOR [logdate]
+GO
+
+ALTER TABLE [dbo].[longqrydetails] ADD  CONSTRAINT [DF_longqrydetails_is_closed]  DEFAULT ((0)) FOR [is_closed]
+GO
+
+ALTER TABLE [dbo].[PageLifeExpectancyLog] ADD  DEFAULT (getdate()) FOR [LoggedAt]
+GO
+
+ALTER TABLE [dbo].[SessionLogs] ADD  DEFAULT (getdate()) FOR [LogTimestamp]
+GO
+
+ALTER TABLE [dbo].[UnusedIndexes] ADD  DEFAULT (getdate()) FOR [Logdate]
+GO
+
+ALTER TABLE [dbo].[sql_server_agent_job_failure]  WITH CHECK ADD  CONSTRAINT [FK_sql_server_agent_job_failure_sql_server_agent_job1] FOREIGN KEY([sql_server_agent_job_id])
+REFERENCES [dbo].[sql_server_agent_job] ([sql_server_agent_job_id])
+GO
+
+ALTER TABLE [dbo].[sql_server_agent_job_failure] CHECK CONSTRAINT [FK_sql_server_agent_job_failure_sql_server_agent_job1]
+GO
+
+ALTER TABLE [dbo].[sql_server_agent_job_failure_old]  WITH CHECK ADD  CONSTRAINT [FK_sql_server_agent_job_failure_sql_server_agent_job] FOREIGN KEY([sql_server_agent_job_id])
+REFERENCES [dbo].[sql_server_agent_job_old] ([sql_server_agent_job_id])
+GO
+
+ALTER TABLE [dbo].[sql_server_agent_job_failure_old] CHECK CONSTRAINT [FK_sql_server_agent_job_failure_sql_server_agent_job]
+GO
+
+
